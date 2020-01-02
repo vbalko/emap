@@ -1,0 +1,142 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "emap",
+    "version": "1.0",
+    "contact": {
+      "name": "Vladimir Balko",
+      "email": "vladimir.balko@effiis.cz"
+    },
+    "description": "API for EFFIIS map visualizer"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/cust/customizing": {
+      "get": {
+        "summary": "Customizing",
+        "tags": [
+          "customizing",
+          "config",
+          "utility"
+        ],
+        "operationId": "get-customizing",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/customizing"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get application main customizing"
+      },
+      "parameters": []
+    },
+    "/cust/filter": {
+      "get": {
+        "summary": "Filter",
+        "tags": [
+          "filter",
+          "config",
+          "customizing",
+          "utility"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/filter-definition"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cust",
+        "description": "Get filter parameters"
+      },
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {
+      "customizing": {
+        "title": "customizing",
+        "x-tags": [
+          "config",
+          "customizing",
+          "utility"
+        ],
+        "type": "object",
+        "description": "Main app customizing structure",
+        "x-examples": {},
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "useFilter": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "filter-definition": {
+        "title": "filter-definition",
+        "x-tags": [
+          "filter"
+        ],
+        "description": "Generic definiton of available filter",
+        "type": "object",
+        "properties": {
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Name of the field"
+                },
+                "type": {
+                  "type": "string",
+                  "default": "string",
+                  "enum": [
+                    "string",
+                    "integer",
+                    "boolean"
+                  ],
+                  "description": "Type of the field"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Description of the field + examples"
+                }
+              },
+              "required": [
+                "name",
+                "type"
+              ]
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional name for filter"
+          }
+        },
+        "required": [
+          "fields"
+        ]
+      }
+    },
+    "securitySchemes": {}
+  }
+}

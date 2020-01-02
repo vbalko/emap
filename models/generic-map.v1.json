@@ -1,0 +1,17 @@
+{
+  "title": "generic map",
+  "type": "object",
+  "x-tags": [
+    "utility"
+  ],
+  "description": "",
+  "x-examples": {},
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    }
+  }
+}
